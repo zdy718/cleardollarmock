@@ -1,0 +1,6 @@
+@BudgetApp.Server_HostAddress = http://localhost:5101
+
+GET {{BudgetApp.Server_HostAddress}}/transactions?userId=demo-user
+Accept: application/json
+
+###

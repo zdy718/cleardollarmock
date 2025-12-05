@@ -1,0 +1,15 @@
+[
+  {
+    "Name": "Launch",
+    "Projects": [
+      {
+        "Path": "budgetapp.client\\budgetapp.client.esproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "BudgetApp.Server\\budgetapp.server.csproj",
+        "Action": "Start"
+      }
+    ]
+  }
+]
