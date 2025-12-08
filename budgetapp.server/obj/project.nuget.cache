@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "D7tbNK+blCY=",
+  "success": true,
+  "projectFilePath": "/Users/zidaneyan/VScode/cleardollarmock/BudgetApp.Server/budgetapp.server.csproj",
+  "expectedPackageFiles": [
+    "/Users/zidaneyan/.nuget/packages/microsoft.aspnetcore.spaproxy/9.0.11/microsoft.aspnetcore.spaproxy.9.0.11.nupkg.sha512"
+  ],
+  "logs": []
+}
