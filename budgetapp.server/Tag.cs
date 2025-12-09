@@ -1,17 +1,15 @@
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace BudgetApp.Server
 {
     public class Tag
     {
-
-        // Optional parent tag for hierarchical tagging (may be null)
-        public int? ParentTagId { get; set; }
-
+        [Key] // Marks this as the Primary Key
         public int TagId { get; set; }
-
-        // Tag text / label
+        public string UserId { get; set; } = string.Empty; // New field
+        public int? ParentTagId { get; set; }
         public string TagName { get; set; } = string.Empty;
-
-        // Budget amount for this tag (use decimal for currency)
         public decimal BudgetAmount { get; set; }
     }
 }

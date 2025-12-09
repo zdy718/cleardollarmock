@@ -1,3 +1,7 @@
+using BudgetApp.Server.Accessors;
+using BudgetApp.Server.Data; // Add this namespace
+using Microsoft.EntityFrameworkCore; // Add this namespace
+
 namespace BudgetApp.Server
 {
     public class Program
@@ -6,36 +10,30 @@ namespace BudgetApp.Server
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
-
             builder.Services.AddControllers();
 
-            // Register mock accessors so Controllers can receive ITagAccessor/ITransactionAccessor
-            builder.Services.AddSingleton<BudgetApp.Server.Accessors.ITagAccessor, BudgetApp.Server.Accessors.MockTagAccessor>();
-            builder.Services.AddSingleton<BudgetApp.Server.Accessors.ITransactionAccessor, BudgetApp.Server.Accessors.MockTransactionAccessor>();
+            // 1. Register the Database Context
+            builder.Services.AddDbContext<BudgetDbContext>(options =>
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+            // 2. Change Dependencies from Singleton Mock to Scoped SQL Accessors
+            // Note: DB services usually use AddScoped, not AddSingleton
+            builder.Services.AddScoped<ITagAccessor, SqlTagAccessor>();
+            builder.Services.AddScoped<ITransactionAccessor, SqlTransactionAccessor>();
 
             var app = builder.Build();
 
             app.UseDefaultFiles();
             app.MapStaticAssets();
 
-            // Configure the HTTP request pipeline.
-
             app.UseHttpsRedirection();
-
             app.UseAuthorization();
-
-
             app.MapControllers();
-
             app.MapFallbackToFile("/index.html");
-
 
             Console.WriteLine("Server Running");
 
             app.Run();
-
-
         }
     }
 }
